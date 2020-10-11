@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
 	public CharacterController2D controller;
+    public int coinValue = 1;
 
 	public float runSpeed = 40f;
 
@@ -35,6 +36,16 @@ public class PlayerMovement : MonoBehaviour {
 			crouch = false;
 		}
 
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if(other.gameObject.CompareTag("coin"))
+		{
+			Destroy(other.gameObject);
+            ScoreManager.instance.ChangeScore(coinValue);
+
+		}
 	}
 
 	public void OnLanding()
